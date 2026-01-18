@@ -192,11 +192,25 @@ The Result: Only "Pure Gold" transactions are wrapped in Jito Bundles. Slag is d
 We prove that privacy and compliance can swim in the same pond.
 
 🏆 Alliance Members
-Anoncoin ($10k): We are the literal Dark Pool infra for your memecoins.
 
-Range ($1.5k): Our "Testum" ensures only pure gold enters the pool.
 
-Helius ($5k): Our turbo-charged motorbike (RPC).
+We are targeting specific bounties where DarkwingDucks fits perfectly:
+
+* **🎯 Anoncoin (Dark Liquidity Pools):**
+    * *Requirement:* "Build dark liquidity pools... provide confidentiality to memecoin launches."
+    * *Our Fit:* We are a literal Dark Pool interface for memecoins, protecting retail launches from snipers.
+
+* **🛡️ Range (Compliant Privacy):**
+    * *Requirement:* "Pre-screening and selective disclosure to ensure compliance."
+    * *Our Fit:* Our "Testum Standard" module implements exactly this: pre-screening wallets for AML/OFAC before allowing access to the Dark Pool.
+
+* **⚡ Helius (RPC & Tooling):**
+    * *Requirement:* "Leverage Helius' RPCs."
+    * *Our Fit:* The entire backend relies on Helius RPC for transaction simulation and forwarding.
+
+* **🎓 Encrypt.trade (Education):**
+    * *Requirement:* "Explain privacy without jargon."
+    * *Our Fit:* We explain complex MEV protection using simple metaphors: "Smoke Bombs" and "Darkwing Duck". No math, just vibes.
 
 ⚠️ Legal Disclaimer (Parody & Non-Affiliation)
 DarkwingDucks is an experimental, non-commercial privacy protocol and a parody commentary on "Dark Pools".
