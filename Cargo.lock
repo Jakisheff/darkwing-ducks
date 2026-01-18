@@ -1286,16 +1286,12 @@ dependencies = [
  "actix-web",
  "base64 0.21.7",
  "bincode",
- "chrono",
  "clap 4.5.54",
  "colored",
- "dashmap",
- "dotenv",
  "reqwest",
  "serde",
  "serde_json",
  "solana-client",
- "solana-program",
  "solana-sdk",
  "tokio",
  "uuid",
@@ -1492,12 +1488,6 @@ dependencies = [
  "quote",
  "syn 2.0.114",
 ]
-
-[[package]]
-name = "dotenv"
-version = "0.15.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "77c90badedccf4105eca100756a0b1289e191f6fcbdadd3cee1d2f614f97da8f"
 
 [[package]]
 name = "eager"

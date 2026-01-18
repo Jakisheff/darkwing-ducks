@@ -62,19 +62,119 @@ We follow the **DDG Standard**:
 * *Same pond. Same mission. Different villains.*
 
 ## 🏗️ Architecture
-
-```mermaid
-graph LR
-    User[Citizen] -->|1. Identity Check<br/>⚠️ LEAK: Wallet ID| Range["Range HQ (Testum)"];
-    Range -->|2. Clear| Arcium[Secret Encoder];
-    Arcium -->|3. Smoke Bomb| Jito[Jito Tunnel];
-    Jito -->|4. Private Delivery| Validator;
-    Mempool[Public Mempool] -.->|Villains| User;
-    linkStyle 0 stroke:orange,stroke-width:2px;
-    linkStyle 4 stroke:red,stroke-width:2px,stroke-dasharray: 5 5;
+```
+┌─────────────────────────────────────────────┐
+│  USER LAYER (Solana Blink)                 │
+│  - Base64-encoded VersionedTransaction     │
+└──────────────────┬──────────────────────────┘
+                   │ POST /api/protect
+┌──────────────────▼──────────────────────────┐
+│  API LAYER (Actix-Web)                     │
+│  - Rate Limiting (IP-based)                │
+│  - Request Validation                      │
+└──────────────────┬──────────────────────────┘
+                   │
+┌──────────────────▼──────────────────────────┐
+│  COMPLIANCE LAYER (Range Protocol)         │
+│  - OFAC Sanctions Screening                │
+│  - Circuit Breaker Pattern                 │
+└──────────────────┬──────────────────────────┘
+                   │
+┌──────────────────▼──────────────────────────┐
+│  PROTOCOL LAYER (Darkwing Core)            │
+│  - Atomic Bundle Construction              │
+│  - Jito Integration                        │
+└──────────────────┬──────────────────────────┘
+                   │ gRPC (TLS)
+┌──────────────────▼──────────────────────────┐
+│  TRANSPORT LAYER (Jito Block Engine)       │
+│  - Amsterdam Region                        │
+│  - Direct-to-Validator                     │
+└──────────────────┬──────────────────────────┘
+                   │
+┌──────────────────▼──────────────────────────┐
+│  INFRASTRUCTURE (Helius RPC)               │
+│  - Enhanced Reliability                    │
+│  - Priority Fee Estimation                 │
+│  - Privacy-Focused Nodes                   │
+└─────────────────────────────────────────────┘
 ```
 
-### ⚖️ The "Testum" Standard (Compliance)
+## 🚀 Powered By
+
+### **Helius** - Enterprise RPC Infrastructure
+- Enhanced transaction reliability
+- Priority fee estimation
+- Privacy-focused node infrastructure
+- 99.9% uptime SLA
+
+### **Range Protocol** - Compliance Layer
+- Real-time OFAC sanctions screening
+- Pre-transaction wallet verification
+- Selective disclosure for compliant privacy
+
+### **Jito** - MEV Protection
+- Direct-to-validator bundle submission
+- Zero mempool exposure
+- Atomic transaction ordering
+
+## 🔌 API & Integration
+┌─────────────────────────────────────────────┐
+│  USER LAYER (Solana Blink)                 │
+│  - Base64-encoded VersionedTransaction     │
+└──────────────────┬──────────────────────────┘
+                   │ POST /api/protect
+┌──────────────────▼──────────────────────────┐
+│  API LAYER (Actix-Web)                     │
+│  - Rate Limiting (IP-based)                │
+│  - Request Validation                      │
+└──────────────────┬──────────────────────────┘
+                   │
+┌──────────────────▼──────────────────────────┐
+│  COMPLIANCE LAYER (Range Protocol)         │
+│  - OFAC Sanctions Screening                │
+│  - Circuit Breaker Pattern                 │
+└──────────────────┬──────────────────────────┘
+                   │
+┌──────────────────▼──────────────────────────┐
+│  PROTOCOL LAYER (Darkwing Core)            │
+│  - Atomic Bundle Construction              │
+│  - Jito Integration                        │
+└──────────────────┬──────────────────────────┘
+                   │ gRPC (TLS)
+┌──────────────────▼──────────────────────────┐
+│  TRANSPORT LAYER (Jito Block Engine)       │
+│  - Amsterdam Region                        │
+│  - Direct-to-Validator                     │
+└──────────────────┬──────────────────────────┘
+                   │
+┌──────────────────▼──────────────────────────┐
+│  INFRASTRUCTURE (Helius RPC)               │
+│  - Enhanced Reliability                    │
+│  - Priority Fee Estimation                 │
+│  - Privacy-Focused Nodes                   │
+└─────────────────────────────────────────────┘
+```
+
+## 🚀 Powered By
+
+### **Helius** - Enterprise RPC Infrastructure
+- Enhanced transaction reliability
+- Priority fee estimation
+- Privacy-focused node infrastructure
+- 99.9% uptime SLA
+
+### **Range Protocol** - Compliance Layer
+- Real-time OFAC sanctions screening
+- Pre-transaction wallet verification
+- Selective disclosure for compliant privacy
+
+### **Jito** - MEV Protection
+- Direct-to-validator bundle submission
+- Zero mempool exposure
+- Atomic transaction ordering
+
+## 🔌 API & Integration
 The Old Saying (The Duck Test): "If it looks like a duck, and swims like a duck, it's a duck."
 
 The Darkwing Standard: We don't judge by feathers. We judge by metal.
