@@ -19,6 +19,27 @@ Even as general network tips decline, **Toxic MEV** remains a predator for retai
 **The Lesson:** The legal system is confused and slow.
 **The Solution:** You cannot wait for a court verdict. You need **DarkwingDucks** to make your transactions invisible to predators *today*.
 
+## 🔌 API & Integration
+
+**Blinks** talk to our Rust backend via `POST /api/protect`. The Blink sends a **signed** transaction payload (Base64).
+
+## 🔑 First-Time Setup (Demo Mode)
+
+1. **Start the server** (Generates relayer wallet):
+   ```bash
+   cargo run --bin server
+   ```
+
+2. **Fund the relayer** (Address printed in console):
+   ```bash
+   solana transfer <RELAYER_PUBKEY> 0.1 --url mainnet-beta
+   ```
+   *Note: This wallet needs SOL to pay Jito bundle tips.*
+
+3. **Rest Easy**: The server now handles the rest.
+
+## 🏆 Integrations
+
 ## 🦸 The Solution: DarkwingDucks
 We provide an **Instant Dark Pool** layer for Solana Blinks.
 We wrap your transaction in a "Smoke Bomb" (Jito Bundle) and route it through a secret tunnel, bypassing public mempool villains entirely.

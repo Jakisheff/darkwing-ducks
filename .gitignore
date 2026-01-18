@@ -1,1 +1,9 @@
 /target
+/security
+relayer-keypair.json
+*.json
+!package.json
+!package-lock.json
+.formatted
+.DS_Store
+**/*.rs.bk
