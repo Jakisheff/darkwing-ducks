@@ -45,7 +45,9 @@ graph LR
     Mempool[Public Mempool] -.->|Villains| User;
     linkStyle 0 stroke:orange,stroke-width:2px;
     linkStyle 4 stroke:red,stroke-width:2px,stroke-dasharray: 5 5;
-⚖️ The "Testum" Standard (Compliance)
+```
+
+### ⚖️ The "Testum" Standard (Compliance)
 The Old Saying (The Duck Test): "If it looks like a duck, and swims like a duck, it's a duck."
 
 The Darkwing Standard: We don't judge by feathers. We judge by metal.
