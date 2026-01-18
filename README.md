@@ -33,13 +33,13 @@ We utilize a split-knowledge pipeline to ensure compliance without compromising 
 
 ```mermaid
 graph LR
-    User[Citizen] -->|1. Signs TX| Blink[Blink UI];
-    Blink -->|2. Send Signed TX| Proxy[Darkwing Proxy];
-    Proxy -->|3. Identity Assayed<br/>(Metadata Leak)| Range[Range HQ];
-    Range -->|4. Approved| Proxy;
-    Proxy -->|5. Wrap in Bundle<br/>(Smoke Bomb)| Jito[Jito Block Engine];
-    Jito -->|6. Private Delivery| Validator;
-    Mempool[Public Mempool] -.->|Villains| User;
+    User[Citizen] -->|"1. Signs TX"| Blink[Blink UI];
+    Blink -->|"2. Send Signed TX"| Proxy[Darkwing Proxy];
+    Proxy -->|"3. Identity Assayed<br/>(Metadata Leak)"| Range[Range HQ];
+    Range -->|"4. Approved"| Proxy;
+    Proxy -->|"5. Wrap in Bundle<br/>(Smoke Bomb)"| Jito[Jito Block Engine];
+    Jito -->|"6. Private Delivery"| Validator;
+    Mempool[Public Mempool] -.->|"Villains"| User;
     
     linkStyle 6 stroke:red,stroke-width:2px,stroke-dasharray: 5 5;
 ```
