@@ -9,6 +9,12 @@ Markdown
 [![Vibe](https://img.shields.io/badge/Vibe-Zero_Ducks_Given-purple)](https://twitter.com)
 [![Status](https://img.shields.io/badge/Status-Educational_Parody-yellow)](https://github.com)
 
+> [!NOTE]
+> **HACKATHON DEMO BUILD (SIMULATION)**
+> This version runs in **Simulation Mode** (Variant A) to demonstrate the UX and Architecture without requiring live mainnet funds/keys during the pitch.
+> *   **Jito/Range/RPC**: Simulated execution latencies.
+> *   **Logs**: Theatrical visualization of the protocol flow.
+
 ## 🚨 The Villain: Dr. Sandwich (Toxic MEV)
 Retail users lost **$450M+** to MEV bots (sandwich attacks) in 2025.
 Even as general network tips decline, **Toxic MEV** remains a predator for retail traders.
