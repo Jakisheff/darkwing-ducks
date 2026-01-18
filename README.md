@@ -1,3 +1,5 @@
+Markdown
+
 # 🦆 DarkwingDucks: Let's get ZKangerous!
 
 > **"The terror that flaps in the mempool."**
@@ -43,3 +45,43 @@ graph LR
     Mempool[Public Mempool] -.->|Villains| User;
     linkStyle 0 stroke:orange,stroke-width:2px;
     linkStyle 4 stroke:red,stroke-width:2px,stroke-dasharray: 5 5;
+⚖️ The "Testum" Standard (Compliance)
+The Old Saying (The Duck Test): "If it looks like a duck, and swims like a duck, it's a duck."
+
+The Darkwing Standard: We don't judge by feathers. We judge by metal.
+
+Etymology Fact: The word "Test" comes from the Latin testum — an earthen pot used by alchemists to assay (determine the purity of) gold.
+
+DarkwingDucks rejects the superficial "Duck Test". Instead, we use the Testum Method:
+
+The Vessel: Range Protocol acts as our assaying vessel.
+
+The Process: Every wallet is tested for OFAC sanctions and AML risks.
+
+The Result: Only "Pure Gold" transactions are wrapped in Jito Bundles. Slag is discarded.
+
+We prove that privacy and compliance can swim in the same pond.
+
+🏆 Alliance Members
+Anoncoin ($10k): We are the literal Dark Pool infra for your memecoins.
+
+Range ($1.5k): Our "Testum" ensures only pure gold enters the pool.
+
+Helius ($5k): Our turbo-charged motorbike (RPC).
+
+⚠️ Legal Disclaimer (Parody & Non-Affiliation)
+DarkwingDucks is an experimental, non-commercial privacy protocol and a parody commentary on "Dark Pools".
+
+Not Affiliated: We are NOT affiliated, associated, authorized, endorsed by, or in any way officially connected with The Walt Disney Company (Darkwing Duck) OR DuckDuckGo Inc. We just really like ducks and privacy.
+
+Parody: This project is a commentary on the "sitting duck" nature of retail traders.
+
+Terminology:
+
+"Darkwing" = Speed of Dark Pool execution.
+
+"Ducks" = Retail users ("Sitting Ducks") needing protection.
+
+No Copyrighted Art: No original assets are used. All visuals are custom/abstract.
+
+Zero Ducks Given about MEV. 100% Compliance Given about Laws.
