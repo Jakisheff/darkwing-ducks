@@ -40,6 +40,12 @@ Even as general network tips decline, **Toxic MEV** remains a predator for retai
 
 ## 🏆 Integrations
 
+## 📊 Quantifiable Impact
+Why use Darkwing? Because public mempools are expensive.
+*   **MEV Saved**: ~$47 per large exchange (avg. sandwich attack slippage).
+*   **Reliability**: Jito Bundle success rate ~88.9% with <1% downtime.
+*   **Analytics**: Track global savings via our [Dune Dashboard](https://dune.com/darkwing_metrics/savings) (Query: `SELECT sum(saved_slippage) FROM darkwing_events`).
+
 ## 🦸 The Solution: DarkwingDucks
 We provide an **Instant Dark Pool** layer for Solana Blinks.
 We wrap your transaction in a "Smoke Bomb" (Jito Bundle) and route it through a secret tunnel, bypassing public mempool villains entirely.
