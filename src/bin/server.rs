@@ -1,73 +1,88 @@
 use actix_web::{post, web, App, HttpServer, HttpResponse, Responder};
-use darkwing_ducks::Darkwing; // Import from our lib
+use darkwing_ducks::Darkwing;
 use solana_sdk::signature::Keypair;
+use solana_sdk::transaction::VersionedTransaction;
 use std::sync::Arc;
 use tokio::sync::Mutex;
+use serde::{Deserialize, Serialize};
+use base64::{Engine as _, engine::general_purpose}; // <--- FIX IMPORT
 
-// --- API STRUCTURES ---
+// --- DATA STRUCTURES ---
 
-#[derive(serde::Deserialize)]
+#[derive(Deserialize)]
 struct ProtectRequest {
     #[serde(rename = "tx_base64")]
-    tx_base64: String, // The signed transaction from the user
+    tx_base64: String, 
 }
 
-#[derive(serde::Serialize)]
-struct QuackResponse {
+#[derive(Serialize)]
+struct ProtectResponse {
     status: String,
     bundle_id: String,
-    proof_type: String, // Easter Egg field
-    message: String,
+    explorer_url: String,
 }
 
 // --- HANDLERS ---
 
-#[post("/lets-get-zkangerous")] // The secret button endpoint
-async fn protect_handler(
+#[post("/api/protect")]
+async fn protect_endpoint(
     data: web::Data<Arc<Mutex<Darkwing>>>,
-    _req: web::Json<ProtectRequest>,
+    req: web::Json<ProtectRequest>,
 ) -> impl Responder {
     
-    // In a real scenario, we would parse req.tx_base64 into a VersionedTransaction
-    // and call data.lock().await.protect_transaction(...)
-    
-    // For the Hackathon Demo, we simulate the logic:
-    println!("📨 Received request to initiate Dark Pool protocol...");
-    
-    // Simulate latency of "Smoke Bomb"
-    let uuid = "888-DARKWING-PROTECTED-UUID".to_string();
+    println!("🦆 Incoming Signal: Blink requested protection...");
 
-    HttpResponse::Ok().json(QuackResponse {
-        status: "ZK_QUACK_CONFIRMED".to_string(),
-        bundle_id: uuid,
-        proof_type: "Zero Knowledge Quack".to_string(),
-        message: "🦆 Flapped away from MEV bots safely. You are the shadow.".to_string(),
-    })
+    // 1. ДЕКОДИРОВАНИЕ (FIXED FOR BASE64 0.21)
+    // Используем general_purpose::STANDARD вместо base64::decode
+    let tx_bytes = match general_purpose::STANDARD.decode(&req.tx_base64) {
+        Ok(b) => b,
+        Err(_) => return HttpResponse::BadRequest().body("Invalid Base64"),
+    };
+    
+    // 2. Десериализация (Bincode)
+    let user_tx: VersionedTransaction = match bincode::deserialize(&tx_bytes) {
+        Ok(tx) => tx,
+        Err(_) => return HttpResponse::BadRequest().body("Invalid Transaction Format"),
+    };
+
+    // 3. Запуск протокола
+    let protection_fee = 1_000_000; 
+    
+    let mut guardian = data.lock().await;
+    match guardian.protect_transaction(user_tx, protection_fee).await {
+        Ok(uuid) => {
+            println!("✅ SUCCESS: Bundle {} dispatched via Jito.", uuid);
+            HttpResponse::Ok().json(ProtectResponse {
+                status: "SECURED".to_string(),
+                bundle_id: uuid.clone(),
+                explorer_url: format!("https://explorer.jito.wtf/bundle/{}", uuid),
+            })
+        },
+        Err(e) => {
+            println!("❌ ERROR: Failed to send bundle: {}", e);
+            HttpResponse::InternalServerError().body(format!("Darkwing Error: {}", e))
+        }
+    }
 }
-
-// --- MAIN ENTRY POINT ---
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    // 1. Setup Solana Connection
-    // NOTE: In production, load Keypair from file!
+    // В продакшене ключи берем из .env!
     let keypair = Keypair::new(); 
     let rpc_url = "https://api.mainnet-beta.solana.com".to_string();
+
+    println!("🦇 Starting DarkwingDucks API Server...");
     
-    // 2. Initialize Darkwing Guardian
-    let hero = Darkwing::new(keypair, rpc_url).await;
-    let hero_data = web::Data::new(Arc::new(Mutex::new(hero)));
+    // Создаем Гардиана один раз и шарим между потоками
+    let guardian = Darkwing::new(keypair, rpc_url).await;
+    let guardian_data = web::Data::new(Arc::new(Mutex::new(guardian)));
 
-    println!("🦇 DarkwingDucks HQ active on port 8080");
-    println!("📡 Listening for distress calls (Blinks)...");
-
-    // 3. Start Web Server
     HttpServer::new(move || {
         App::new()
-            .app_data(hero_data.clone())
-            .service(protect_handler)
+            .app_data(guardian_data.clone())
+            .service(protect_endpoint)
     })
-    .bind(("0.0.0.0", 8080))?
+    .bind(("127.0.0.1", 8080))?
     .run()
     .await
 }

@@ -7,15 +7,9 @@
 [![Vibe](https://img.shields.io/badge/Vibe-Zero_Ducks_Given-purple)](https://twitter.com)
 [![Status](https://img.shields.io/badge/Status-Educational_Parody-yellow)](https://github.com)
 
-## 🚨 The Villain: Dr. Sandwich (Toxic MEV)
+## 🚨 The Villain: Dr. Sandwich
 Retail users lost **$450M+** to MEV bots (sandwich attacks) in 2025.
-Even as general network tips decline, **Toxic MEV** remains a predator for retail traders.
-
-### ⚖️ The "Crying Juror" Reality (Why Law Failed)
-**Case Study (Nov 2025):** In the *US v. Peraire-Bueno* MEV fraud case, the federal jury deadlocked in a mistrial. Jurors were reportedly "crying" and having "sleepless nights," unable to decide if MEV is a crime or a strategy.
-
-**The Lesson:** The legal system is confused and slow.
-**The Solution:** You cannot wait for a court verdict. You need **DarkwingDucks** to make your transactions invisible to predators *today*.
+You need a hero. Not a boring mixer, but a **Masked Vigilante**.
 
 ## 🦸 The Solution: DarkwingDucks
 We provide an **Instant Dark Pool** layer for Solana Blinks.
@@ -29,13 +23,41 @@ We follow the **DDG Standard**:
 * **DarkwingDucks** stops MEV Bots from tracking your swaps.
 * *Same pond. Same mission. Different villains.*
 
-## 🏗️ Architecture
+## 🏗️ Architecture (Trust-Minimized Pipeline)
 
+We utilize a split-knowledge pipeline to ensure compliance without compromising intent privacy.
+
+*   **Range Protocol** receives only wallet identity (metadata).
+*   **Arcium/Jito** processes encrypted intent (asset protection).
+*   **Proxy** (Darkwing) wraps the **already signed** user transaction; it cannot modify it (no custody).
+
+```mermaid
 graph LR
-    User[Citizen] -->|1. Identity Check<br/>⚠️ LEAK: Wallet ID| Range["Range HQ (Testum)"];
-    Range -->|2. Clear| Arcium[Secret Encoder];
-    Arcium -->|3. Smoke Bomb| Jito[Jito Tunnel];
-    Jito -->|4. Private Delivery| Validator;
+    User[Citizen] -->|1. Signs TX| Blink[Blink UI];
+    Blink -->|2. Send Signed TX| Proxy[Darkwing Proxy];
+    Proxy -->|3. Identity Assayed<br/>(Metadata Leak)| Range[Range HQ];
+    Range -->|4. Approved| Proxy;
+    Proxy -->|5. Wrap in Bundle<br/>(Smoke Bomb)| Jito[Jito Block Engine];
+    Jito -->|6. Private Delivery| Validator;
     Mempool[Public Mempool] -.->|Villains| User;
-    linkStyle 0 stroke:orange,stroke-width:2px;
-    linkStyle 4 stroke:red,stroke-width:2px,stroke-dasharray: 5 5;
+    
+    linkStyle 6 stroke:red,stroke-width:2px,stroke-dasharray: 5 5;
+```
+
+### ⚖️ The "Testum" Standard (Compliance)
+> **"We leak metadata (Who) to protect the asset (What)."**
+
+Range Protocol acts as our assaying vessel. It knows *who* is transacting (to check against OFAC list), but the public mempool does not know *what* you are trading until it's too late for them to attack.
+
+1.  **The Vessel**: Range Protocol acts as our assaying vessel.
+2.  **The Process**: Every wallet is tested for OFAC sanctions and AML risks.
+3.  **The Result**: Only "Pure Gold" transactions are wrapped in Jito Bundles.
+
+## 🔌 API & Integration
+
+**Blinks** talk to our Rust backend via `POST /api/protect`. The Blink sends a **signed** transaction payload (Base64), and the server wraps it into a bundle without needing the user's private key.
+
+## 🏆 Integrations
+*   **Anoncoin**: Instant Dark Pool infrastructure.
+*   **Range**: `screen_wallet` for AML compliance.
+*   **Helius**: High-speed DAS & RPC.
