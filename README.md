@@ -31,9 +31,8 @@ We follow the **DDG Standard**:
 
 ## 🏗️ Architecture
 
-```mermaid
 graph LR
-    User[Citizen] -->|1. Identity Check<br/>⚠️ LEAK: Wallet ID| Range[Range HQ (Testum)];
+    User[Citizen] -->|1. Identity Check<br/>⚠️ LEAK: Wallet ID| Range["Range HQ (Testum)"];
     Range -->|2. Clear| Arcium[Secret Encoder];
     Arcium -->|3. Smoke Bomb| Jito[Jito Tunnel];
     Jito -->|4. Private Delivery| Validator;
