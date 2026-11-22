@@ -1,5 +1,3 @@
-Markdown
-
 # 🦆 DarkwingDucks: Let's get ZKangerous!
 
 > **"The terror that flaps in the mempool."**
@@ -20,31 +18,30 @@ Retail users lost **$450M+** to MEV bots (sandwich attacks) in 2025.
 Even as general network tips decline, **Toxic MEV** remains a predator for retail traders.
 
 ### ⚖️ The "Crying Juror" Reality (Why Law Failed)
-**Case Study (Nov 2025):** In the *US v. Peraire-Bueno* MEV fraud case, the federal jury deadlocked in a mistrial. Jurors were reportedly "crying" and having "sleepless nights," unable to decide if MEV is a crime or a strategy.
+**Case Study:** In *US v. Peraire-Bueno*, two brothers were accused of taking $25M from sandwich bots on Ethereum in a 12-second scheme. The jury deadlocked in November 2025. On 16 November 2026 Judge Jessica Clarke acquitted them: the prosecution had not proved a material misrepresentation ([The Block](https://www.theblock.co/news/regulation/2026-11-16-peraire-bueno-brothers-acquitted-ethereum-mev-wire-fraud-441425)).
 
-**The Lesson:** The legal system is confused and slow.
+**The Lesson:** The court did not treat this MEV as fraud.
 **The Solution:** You cannot wait for a court verdict. You need **DarkwingDucks** to make your transactions invisible to predators *today*.
 
 ## 🔌 API & Integration
 
-**Blinks** talk to our Rust backend via `POST /api/protect`. The Blink sends a **signed** transaction payload (Base64).
+**Blinks** talk to our Rust backend via `POST /lets-get-zkangerous`. The Blink sends a **signed** transaction payload (Base64) as JSON: `{"tx_base64": "<base64>"}`.
 
-## 🔑 First-Time Setup (Demo Mode)
+## 🔑 Run the Demo (Simulation Mode)
 
-1. **Start the server** (Generates relayer wallet):
+1. **Start the server** (listens on `127.0.0.1:8080`):
    ```bash
    cargo run --bin server
    ```
 
-2. **Fund the relayer** (Address printed in console):
+2. **Send a request**:
    ```bash
-   solana transfer <RELAYER_PUBKEY> 0.1 --url mainnet-beta
+   curl -X POST http://127.0.0.1:8080/lets-get-zkangerous \
+     -H "Content-Type: application/json" \
+     -d '{"tx_base64": "<base64 signed transaction>"}'
    ```
-   *Note: This wallet needs SOL to pay Jito bundle tips.*
 
-3. **Rest Easy**: The server now handles the rest.
-
-## 🏆 Integrations
+The server answers after about one second with a simulated `bundle_id`. It saves no wallet and sends nothing to the network, so no SOL is needed. `GET /health` returns the status line.
 
 ## 📊 Quantifiable Impact
 Why use Darkwing? Because public mempools are expensive.
@@ -73,7 +70,7 @@ We follow the **DDG Standard**:
 │  USER LAYER (Solana Blink)                 │
 │  - Base64-encoded VersionedTransaction     │
 └──────────────────┬──────────────────────────┘
-                   │ POST /api/protect
+                   │ POST /lets-get-zkangerous
 ┌──────────────────▼──────────────────────────┐
 │  API LAYER (Actix-Web)                     │
 │  - Rate Limiting (IP-based)                │
@@ -124,68 +121,12 @@ We follow the **DDG Standard**:
 - Zero mempool exposure
 - Atomic transaction ordering
 
-## 🔌 API & Integration
-┌─────────────────────────────────────────────┐
-│  USER LAYER (Solana Blink)                 │
-│  - Base64-encoded VersionedTransaction     │
-└──────────────────┬──────────────────────────┘
-                   │ POST /api/protect
-┌──────────────────▼──────────────────────────┐
-│  API LAYER (Actix-Web)                     │
-│  - Rate Limiting (IP-based)                │
-│  - Request Validation                      │
-└──────────────────┬──────────────────────────┘
-                   │
-┌──────────────────▼──────────────────────────┐
-│  COMPLIANCE LAYER (Range Protocol)         │
-│  - OFAC Sanctions Screening                │
-│  - Circuit Breaker Pattern                 │
-└──────────────────┬──────────────────────────┘
-                   │
-┌──────────────────▼──────────────────────────┐
-│  PROTOCOL LAYER (Darkwing Core)            │
-│  - Atomic Bundle Construction              │
-│  - Jito Integration                        │
-└──────────────────┬──────────────────────────┘
-                   │ gRPC (TLS)
-┌──────────────────▼──────────────────────────┐
-│  TRANSPORT LAYER (Jito Block Engine)       │
-│  - Amsterdam Region                        │
-│  - Direct-to-Validator                     │
-└──────────────────┬──────────────────────────┘
-                   │
-┌──────────────────▼──────────────────────────┐
-│  INFRASTRUCTURE (Helius RPC)               │
-│  - Enhanced Reliability                    │
-│  - Priority Fee Estimation                 │
-│  - Privacy-Focused Nodes                   │
-└─────────────────────────────────────────────┘
-```
-
-## 🚀 Powered By
-
-### **Helius** - Enterprise RPC Infrastructure
-- Enhanced transaction reliability
-- Priority fee estimation
-- Privacy-focused node infrastructure
-- 99.9% uptime SLA
-
-### **Range Protocol** - Compliance Layer
-- Real-time OFAC sanctions screening
-- Pre-transaction wallet verification
-- Selective disclosure for compliant privacy
-
-### **Jito** - MEV Protection
-- Direct-to-validator bundle submission
-- Zero mempool exposure
-- Atomic transaction ordering
-
-## 🔌 API & Integration
+## ⚖️ The "Testum" Standard (Compliance)
 The Old Saying (The Duck Test): "If it looks like a duck, and swims like a duck, it's a duck."
 
 The Darkwing Standard: We don't judge by feathers. We judge by metal.
 
-Etymology Fact: The word "Test" comes from the Latin testum — an earthen pot used by alchemists to assay (determine the purity of) gold.
+Etymology Fact: The word "Test" comes from the Latin testum, an earthen pot used by alchemists to assay (determine the purity of) gold.
 
 DarkwingDucks rejects the superficial "Duck Test". Instead, we use the Testum Method:
 
@@ -197,8 +138,7 @@ The Result: Only "Pure Gold" transactions are wrapped in Jito Bundles. Slag is d
 
 We prove that privacy and compliance can swim in the same pond.
 
-🏆 Alliance Members
-
+## 🏆 Alliance Members
 
 We are targeting specific bounties where DarkwingDucks fits perfectly:
 
@@ -218,7 +158,8 @@ We are targeting specific bounties where DarkwingDucks fits perfectly:
     * *Requirement:* "Explain privacy without jargon."
     * *Our Fit:* We explain complex MEV protection using simple metaphors: "Smoke Bombs" and "Darkwing Duck". No math, just vibes.
 
-⚠️ Legal Disclaimer (Parody & Non-Affiliation)
+## ⚠️ Legal Disclaimer (Parody & Non-Affiliation)
+
 DarkwingDucks is an experimental, non-commercial privacy protocol and a parody commentary on "Dark Pools".
 
 Not Affiliated: We are NOT affiliated, associated, authorized, endorsed by, or in any way officially connected with The Walt Disney Company (Darkwing Duck) OR DuckDuckGo Inc. We just really like ducks and privacy.
